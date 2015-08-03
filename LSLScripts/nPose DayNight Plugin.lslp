@@ -8,6 +8,13 @@
 //
 // Have fun
 // Leona (slmember1 Resident)
+//
+// Source Code:
+// https://github.com/LeonaMorro/nPose-DayNight-plugin
+//
+// Report Bugs to:
+// https://github.com/LeonaMorro/nPose-DayNight-plugin/issues
+// or IM slmember1 Resident (Leona)
 
 
 string MY_PERMISSION_NAME="day";
