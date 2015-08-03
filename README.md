@@ -8,5 +8,5 @@ Example:
 
 this will enable the button "reading" during the SL day and the button "sleeping" during the SL night
 
-Have fun
+Have fun  
 Leona (slmember1 Resident)
