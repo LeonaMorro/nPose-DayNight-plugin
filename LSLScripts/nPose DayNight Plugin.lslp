@@ -1,0 +1,46 @@
+// This example shows you how to register and use an user defined permission
+// If you put this script into your nPose build, you will be able to use
+// the permission {day}, which is true during the SL day and false during the SL night.
+// example:
+// SET:Poses:reading{day}
+// SET:Poses:sleeping{!day}
+// this will enable the button "reading" during the SL day and the button "sleeping" during the SL night
+//
+// Have fun
+// Leona (slmember1 Resident)
+
+
+string MY_PERMISSION_NAME="day";
+integer USER_PERMISSION_UPDATE=-806;
+
+integer getDay() {
+	//returns TRUE during the SL day and FALSE during the SL night
+	vector sun=llGetSunDirection();
+	if(sun.z>-0.1) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+updatePermissionBool(string permissionName, integer flag) {
+	string str=llList2CSV([permissionName, "bool", flag]);
+	// the string consists of:
+	// the unique permission name you want to use
+	// the type: in this case bool
+	// the current Value: 1 or 0
+	llMessageLinked(LINK_SET, USER_PERMISSION_UPDATE, str, NULL_KEY);
+}
+
+default {
+	state_entry() {
+		//we do't need so much script memory for this script
+		llSetMemoryLimit(llGetUsedMemory() + 2048);
+		//send one update at the beginnig, so you have not to wait 5 minutes until the first update occurs
+		updatePermissionBool(MY_PERMISSION_NAME, getDay());
+		//set the timer to check for day/night every 5 minutes (300s)
+		llSetTimerEvent(300.0);
+	}
+	timer() {
+		updatePermissionBool(MY_PERMISSION_NAME, getDay());
+	}
+}
