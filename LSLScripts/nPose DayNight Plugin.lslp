@@ -18,7 +18,7 @@
 
 
 string MY_PERMISSION_NAME="day";
-integer USER_PERMISSION_UPDATE=-806;
+integer UDPBOOL=-804;
 
 integer getDay() {
 	//returns TRUE during the SL day and FALSE during the SL night
@@ -30,12 +30,10 @@ integer getDay() {
 }
 
 updatePermissionBool(string permissionName, integer flag) {
-	string str=llList2CSV([permissionName, "bool", flag]);
 	// the string consists of:
 	// the unique permission name you want to use
-	// the type: in this case bool
 	// the current Value: 1 or 0
-	llMessageLinked(LINK_SET, USER_PERMISSION_UPDATE, str, NULL_KEY);
+	llMessageLinked(LINK_SET, UDPBOOL, permissionName + "=" + (string)flag, NULL_KEY);
 }
 
 default {
